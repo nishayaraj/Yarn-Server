@@ -1,0 +1,32 @@
+[
+  {
+    "model": "yarnserverapi.mystory",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "title": "The Beginning",
+      "author_name": "knmr",
+      "is_published": false,
+      "public": false,
+      "story": "The geography, people and weather was not anything like I have ever seen.",
+      "date": "2020-10-08",
+      "image_url": "https://images.pexels.com/photos/5420712/pexels-photo-5420712.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+    }
+  },
+  {
+    "model": "yarnserverapi.mystory",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "title": "Ocean",
+      "author_name": "Tam",
+      "is_published": false,
+      "public": false,
+      "story": "The waves, the calm, the storm",
+      "date": "2023-10-08",
+      "image_url": "https://images.pexels.com/photos/977736/pexels-photo-977736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    }
+  }
+
+]

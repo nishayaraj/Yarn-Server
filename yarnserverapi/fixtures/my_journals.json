@@ -1,0 +1,24 @@
+[
+  {
+    "model": "yarnserverapi.myjournal",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "journal_type": "Journey's and Travels",
+      "date": "2020-10-08",
+      "image_url": "https://images.pexels.com/photos/2667691/pexels-photo-2667691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+    }
+  },
+  {
+    "model": "yarnserverapi.myjournal",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "journal_type": "Unknown",
+      "date": "2020-10-08",
+      "image_url": "https://images.pexels.com/photos/5899214/pexels-photo-5899214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    }
+  }
+
+]

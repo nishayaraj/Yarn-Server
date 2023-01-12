@@ -10,4 +10,5 @@ class MyStory(models.Model):
     public = models.BooleanField()
     story = models.TextField(max_length=900)
     date = models.DateField()
+    image_url = models.CharField(max_length=200)
   

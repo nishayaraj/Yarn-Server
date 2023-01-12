@@ -1,0 +1,10 @@
+[
+  {
+    "model": "yarnserverapi.user",
+    "pk": 1,
+    "fields": {
+        "uid": "29kuhEmwsMW8qjIQQoZcRZR994W2",
+        "name": "Nish"
+    }
+  }
+]
