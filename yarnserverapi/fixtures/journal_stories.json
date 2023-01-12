@@ -1,0 +1,11 @@
+[
+  {
+    "model": "yarnserverapi.journalstory",
+    "pk": 1,
+    "fields": {
+      "my_journal": 1,
+      "my_story": 1
+    }
+  }
+
+]
