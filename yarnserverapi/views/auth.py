@@ -40,7 +40,7 @@ def register_user(request):
 
     # Now save the user info in the yarnserverapi-user table
     user = User.objects.create(
-        bio=request.data['bio'],
+        name=request.data['name'],
         uid=request.data['uid']
     )
 
