@@ -62,6 +62,22 @@ class MyJournalView(ViewSet):
             return Response({'message': 'Unable to create journal. '
                              + ex.args[0]}, status=status.HTTP_401_UNAUTHORIZED)
 
+    def update(self, request, pk):
+        """Handle PUT requests for my_journal
+
+        Returns:
+        Response -- Empty body with 204 status code
+        """
+
+        my_journal = MyJournal.objects.get(pk=pk)
+        my_journal.journal_type = request.data['journal_type']
+        my_journal.image_url = request.data['image_url']
+        my_journal.date = request.data['date']
+
+        my_journal.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
 class MyJournalSerializer(serializers.ModelSerializer):
     """JSON serializer for journals
     """
