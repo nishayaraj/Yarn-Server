@@ -12,3 +12,10 @@ class MyStory(models.Model):
     date = models.DateField()
     image_url = models.CharField(max_length=200)
   
+    @property
+    def journals_on_story(self):
+        return self.__journals_on_story
+    
+    @journals_on_story.setter
+    def journals_on_story(self, value):
+        self.__journals_on_story=value
