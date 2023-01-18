@@ -17,10 +17,11 @@ from django.conf.urls import include
 from rest_framework import routers
 from django.contrib import admin
 from django.urls import path
-from yarnserverapi.views import register_user, check_user, MyJournalView
+from yarnserverapi.views import register_user, check_user, MyJournalView, MyStoryView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'myjournals', MyJournalView, 'myjournal')
+router.register(r'mystories', MyStoryView, 'mystory')
 
 urlpatterns = [
     path('register', register_user),
