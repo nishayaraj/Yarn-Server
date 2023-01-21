@@ -32,25 +32,31 @@ class MyJournalView(ViewSet):
                              + ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
-        """get all journals"""
-        my_journals = MyJournal.objects.all()
-        serializer = MyJournalSerializer(my_journals, many=True)
-        serial_my_journal = serializer.data
-        for my_journal in serial_my_journal:
-            my_journal['journalType'] = my_journal.pop('journal_type')
-            my_journal['imageUrl'] = my_journal.pop('image_url')
-            my_journal['userId'] = my_journal.pop('user_id')
-        return Response(serial_my_journal)
+        """get my journals"""
+        try:
+            user_id = request.GET.get("userId")
+            my_journals = MyJournal.objects.filter(user_id=user_id).values()
+            serializer = MyJournalSerializer(my_journals, many=True)
+            serial_my_journal = serializer.data
+            for my_journal in serial_my_journal:
+                my_journal['journalType'] = my_journal.pop('journal_type')
+                my_journal['imageUrl'] = my_journal.pop('image_url')
+                my_journal['userId'] = my_journal.pop('user_id')
+            return Response(serial_my_journal)
+        except MyJournal.DoesNotExist as ex:
+            return Response({'message': 'Unable to get my journals data. '
+                             + ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
 
     def create(self, request):
         '''handels creation of my journals'''
-        user_id = request.data['user_id']
+        user_id = request.data['userId']
 
         try:
             User.objects.get(id = user_id)
             my_journal = MyJournal.objects.create(
-            journal_type = request.data['journal_type'],
-            image_url = request.data['image_url'],
+            journal_type = request.data['journalType'],
+            image_url = request.data['imageUrl'],
             date = request.data['date'],
             user_id = user_id
             )
@@ -70,11 +76,18 @@ class MyJournalView(ViewSet):
         """
 
         my_journal = MyJournal.objects.get(pk=pk)
-        my_journal.journal_type = request.data['journal_type']
-        my_journal.image_url = request.data['image_url']
+        my_journal.journal_type = request.data['journalType']
+        my_journal.image_url = request.data['imageUrl']
         my_journal.date = request.data['date']
 
         my_journal.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    def destroy(self, request, pk):
+        '''Delete request for my_story'''
+        my_journal = MyJournal.objects.get(pk=pk)
+        my_journal.delete()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
