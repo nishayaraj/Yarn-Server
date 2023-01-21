@@ -4,7 +4,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from yarnserverapi.models import MyStory, User, MyJournal, JournalStory
+from yarnserverapi.models import MyStory, MyJournal, JournalStory
 
 
 class MyStoryView(ViewSet):
@@ -50,6 +50,30 @@ class MyStoryView(ViewSet):
         try:
             user_id = request.GET.get("userId")
             journal_id = request.GET.get("journalId")
+            if not user_id and not user_id:
+                my_stories = MyStory.objects.filter(is_published=True, public=True).values()
+                serializer = MyStorySerializer(my_stories, many=True)
+                serial_my_story = serializer.data
+                for my_story in serial_my_story:
+                    my_story['authorName'] = my_story.pop('author_name')
+                    my_story['imageUrl'] = my_story.pop('image_url')
+                    my_story['isPublished'] = my_story.pop('is_published')
+                    my_story['userId'] = my_story.pop('user_id')
+
+                    filtered_journals_story = JournalStory.objects.filter(my_story_id=my_story['id'])
+                    journals_on_story = []
+
+                    for journal_story in filtered_journals_story:
+                        try:
+                            journal_on_story = MyJournal.objects.get(id=journal_story.my_journal_id)
+
+                            journals_on_story.append({'id': journal_on_story.id, 'journalType': journal_on_story.journal_type})
+                        except:
+                            pass
+
+                    my_story['journals'] = journals_on_story
+
+                return Response(serial_my_story)
             if user_id:
                 my_stories = MyStory.objects.filter(user_id=user_id).values()
                 serializer = MyStorySerializer(my_stories, many=True)
