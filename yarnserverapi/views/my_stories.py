@@ -50,7 +50,7 @@ class MyStoryView(ViewSet):
         try:
             user_id = request.GET.get("userId")
             journal_id = request.GET.get("journalId")
-            if not user_id and not user_id:
+            if not user_id and not journal_id:
                 my_stories = MyStory.objects.filter(is_published=True, public=True).values()
                 serializer = MyStorySerializer(my_stories, many=True)
                 serial_my_story = serializer.data
